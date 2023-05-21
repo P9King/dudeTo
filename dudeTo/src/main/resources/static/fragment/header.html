@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>boardList</title>
+  <link rel="stylesheet" href="BoardCss/listBoardPageCss.css">
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="container">
+    <table>
+      <tr class="">
+        <td>
+          번호
+        </td>
+        <td>
+          작성자
+        </td>
+        <td>
+          제목
+        </td>
+        <td>
+          날짜
+        </td>
+      </tr>
+
+      <tr th:if="${listBoard != null}" th:each="list:${listBoard}">
+        <td  th:text=${list.boardId}>
+
+        </td>
+
+        <td th:if="${listBoard != null}" th:text="${list.userNickname}">
+
+        </td>
+
+        <td>
+          <!--뒤에 쿼리 스트링은 값만 넘겨준다-->
+          <a th:href="@{/lookInBoard(boardId=${list.boardId})}"> [[${list.title}]] </a>
+        </td>
+        <td th:if="${list != null}" th:text=${list.boardCreatedTime}>
+
+        </td>
+      </tr>
+    </table>
+    <div class="writeBoardBtnArea">
+      <a href="/writeBoard">
+        <button class="writeBoardBtn" type="button">글쓰기</button>
+      </a>
+    </div>
+
+    <!--페이지 이동 구간 -->
+    <div class="pageArea">
+            <span class="page" th:text="${paging.getPage_Start()}">
+                <!--맨 처음 페이지-->
+            </span>
+
+      <span class="page" th:each=" page : ${#numbers.sequence(paging.getPage_Start(), paging.getPage_End())}">
+                <div>
+                    <a th:href="@{/listBoard(page=${page})}">[[${page}]]</a>
+                </div>
+            </span>
+
+      <span class="page" th:text=${paging.getPage_End()}>
+                <!--맨 마지막 페이지-->
+            </span>
+    </div>
+  </div>
+</body>
+</html>

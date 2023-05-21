@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main page</title>
+    <link rel="stylesheet" href="/mainPageCss.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
+    <div class = "container">
+        <div class="header">
+            헤더는 빨간색입니다
+
+            <nav class="navbar">
+                nav bar 구간입니다
+
+            </nav>
+            <div class="headerloginArea">
+                <div class="login">
+                    <form id = "afterLogin" method="post" onsubmit="return false">
+                        <input id = "loginEmail" type="text" name="email" placeholder="email"/>
+                        <input id = "loginPassword" type="password" name="password" placeholder="password"/>
+                        <input type="button" value="로그인" onclick="tryLogin()"/>
+                        <button type="button"  onclick="location.href = '/join';">회원가입</button>
+                    </form>
+                 </div>
+            </div>
+        </div>
+
+        <div class="contentBody">
+            <div class="leftAdvertisement">
+                왼쪽 광고 영역입니다
+            </div>
+            <div class="content">
+                본문 영역입니다
+            </div>
+            <div class="rightAdvertisement">
+                오른쪽 광고 영역 입니다
+            </div>
+        </div>
+
+        <div class="footer">
+            풋터는 파란색입니다
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        function tryLogin(){
+            let form = $('#afterLogin')[0];
+            let formData = new FormData(form);
+
+            $.ajax({
+                type : 'POST',
+                url : "/tryLogin",
+                contentType : false,
+                processData : false,
+                data : formData,
+                success : function(data) {
+                    console.log(data.result);
+                    if(data.result=="로그인 성공"){
+                        location.href="/afterLogin";
+                    }else {
+                        alert(data.result);
+                        $('#loginEmail').val("");
+                        $('#loginPassword').val("");
+                    }
+                }
+
+            })
+        }
+
+
+    </script>
+</body>
+</html>

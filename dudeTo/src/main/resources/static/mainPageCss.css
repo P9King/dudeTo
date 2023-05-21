@@ -1,0 +1,47 @@
+
+.container{
+    border: 1px solid black;
+
+}
+
+
+/*-------헤더 영역-------*/
+.header{
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login{
+    margin: 0 100px 0 0;
+}
+
+/*------------contentBody영역---------*/
+
+.contentBody{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+
+}
+
+
+.leftAdvertisement{
+    border: 1px solid black;
+}
+
+.content{
+    border: 1px solid black;
+}
+
+.rightAdvertisement{
+    border: 1px solid black;
+}
+
+
+/*-------풋터 영역------*/
+.footer{
+    border: 1px solid blue;
+}

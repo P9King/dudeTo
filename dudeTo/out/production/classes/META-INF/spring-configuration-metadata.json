@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "com.dudeto.dudeto.config.WebConfig",
+      "sourceType": "com.dudeto.dudeto.config.WebConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

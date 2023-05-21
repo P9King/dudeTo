@@ -1,0 +1,56 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+#writeTable{
+    width: 1000px;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+#writeTable tr {
+    width: 100px;
+    border: 1px solid black;
+    font-size: 16px;
+}
+
+#writeTable tr td{
+    width: 100px;
+    border: 1px solid black;
+    font-size: 16px;
+}
+.inputTdTitle{
+    width: 700px;
+    height: 50px;
+    font-size: 16px;
+}
+
+#title{
+    width: 99.9%;
+    height: 100%;
+    font-size: 16px;
+}
+
+#content{
+    width: 99.9%;
+    height: 99.9%;
+    font-size: 16px;
+}
+
+.inputTdContent{
+    width: 700px;
+    height: 155px;
+    font-size: 16px;
+
+}
+
+#submit{
+    width: 60px;
+    height: 35px;
+}
+
+.writeBoardSubmitTd{
+    border: 1px solid white;
+}

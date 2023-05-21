@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Write Board</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+  <link rel="stylesheet" href="/BoardCss/writeBoardPageCss.css">
+</head>
+<body>
+
+  <div class = "wrapper">
+    <div class = "writeBoardArea">
+      <form action="/writeBoard" enctype="multipart/form-data" method="post">
+        <table id = "writeTable">
+          <!--게시판 제목-->
+          <tr>
+            <td>
+              게시판 제목
+            </td>
+            <td class="inputTdTitle">
+              <input id ="title" type="text" name="title" placeholder="게시판 제목을 입력 해주세요."/>
+            </td>
+          </tr>
+
+          <!--게시판 내용-->
+          <tr>
+            <td>
+              게시판 내용
+            </td>
+            <td class="inputTdContent">
+             <textarea id ="content" name="content"></textarea>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <!--아래에 히든으로 로그인한 이메일 값 넘겨주자-->
+              업로드할 파일 파일
+            </td>
+            <td class="inputTd">
+              <input type="file" name="boardFile" multiple/>
+            </td>
+          </tr>
+
+          <tr>
+            <td class ="writeBoardSubmitTd" colspan="2">
+           <!--   <input type ="hidden"  name = writer th:value="${nickname}">-->
+              <input id ="submit" type="submit" name=""/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>쓴 게시글 보기</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link rel="stylesheet" href="/BoardCss/lookInBoardPageCss.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="totalContent">
+        <div class="writeBoardArea">
+            <form action="#" enctype="multipart/form-data" method="post">
+                <table id="writeTable">
+                    <!--게시판 제목-->
+                    <tr th:each="list:${list}">
+                        <td class="noneInputAreaTd">
+                            게시판 제목
+                        </td>
+                        <td class="inputTdTitle">
+                            <input id="title" type="text" name="title" placeholder="게시판 제목을 입력 해주세요."
+                                   th:value="${list.title}" readonly/>
+                        </td>
+                    </tr>
+
+
+                    <!--게시판 내용-->
+                    <tr>
+                        <td class="noneInputAreaTd">
+                            게시판 내용
+                        </td>
+                        <td class="inputTdContent">
+                            <textarea id="content" name="content" readonly>[[${list[0].content}]]</textarea>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${boardFileList != null}" >
+                        <td class="noneInputAreaTd" >
+
+                            이미지<!--${boardFileList.stordFileName}-->
+                        </td>
+                        <td>
+                            <img th:each="boardFileList : ${boardFileList}" th:src="@{/|files/${boardFileList.stordFileName}|}" alt="게시판에 업로드 된 이미지">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="writeBoardSubmitTd" colspan="2">
+                            <input id="amendBtn" type="submit" name="" value="수정"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!--댓글 달 공간-->
+        <div class="goCommentArea" onclick="commentArea()">
+            <div class="commentCount">
+                댓글 갯수가 들어갈 공간
+            </div>
+
+            <div class="readyToComment">
+                댓글 쓸 사람~~~~~~~~~~~~~~~~
+            </div>
+        </div>
+
+        <div class="writeComment">
+                <form action="/writreComment" method="get">
+                    <div class=writeMyComment>
+                        <input type="hidden" th:value="${loginedUserNickname}"/>
+                        <textarea id="commentTextArea" name="comment" placeholder="댓글을 입력해 주세요."></textarea>
+                        <div><input class ="cancelCommentBtn" type="button" value="취소하기" onclick="cancelComment()">
+                            <input id="commentSubmitBtn" type="submit" value="댓글달기"/>
+                        </div>
+                    </div>
+                </form>
+                <div class ="comments">
+                    여기에 이제 th:each =" list:${commentList}"로 댓글을 다 보이게 하는 곳
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    let amendBtn = document.querySelector('#amendBtn');
+    let identification = [[${loginedUserNickname}]];
+    let myNickname = [[${list[0].getUserEntity.getNickname}]];
+    console.log(identification);
+    console.log(myNickname);
+
+    if (identification == myNickname) {
+        amendBtn.style.display = 'block';
+    }
+
+
+    /*댓글 창 보이기*/
+    let writeCommentArea = document.querySelector('.writeComment');
+    function commentArea() {
+        writeCommentArea.style.display="block";
+
+    }
+
+    /*댓글창 숨기기*/
+    function cancelComment(){
+        console.log('click');
+        writeCommentArea.style.display="none";
+    }
+
+</script>
+</body>
+</html>
+
+

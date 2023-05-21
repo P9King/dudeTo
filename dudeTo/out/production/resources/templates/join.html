@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>joinForm</title>
+    <link rel="stylesheet" th:href="@{/joinPageCss.css}" href="/static/joinPageCss.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class =joinContainer>
+
+        <div>
+            <h1>회원가입 페이지 </h1>
+        </div>
+
+
+        <div class="join">
+            <form id ="joinForm" method="post" onsubmit="return false">
+                <div class="joinInputAdjust">
+                    <input id = "email" type="text" name="email" placeholder="email" readonly/>
+                    <button class="availableIdBtn" type="button" onclick="openEmailCheckModal()"/>중복체크</button>
+                </div>
+
+                <div class="joinInput">
+                    <input type="password" name="password" placeholder="password"/>
+                </div>
+
+                <div class="joinInput">
+                    <input type="text" name="name" placeholder="name"/>
+                </div>
+
+                <div class="joinInput">
+                    <input type="text" name="nickname" placeholder="nickname"/>
+                </div>
+                <input type="submit" value="회원가입" onclick="join()"/>
+            </form>
+
+            <div id = "emailCheckModal">
+                <div>
+                    <form id = "availableEmailForm" onsubmit="return false">
+                        <input id="emailCheckInput" name="email" type="text" placeholder="email"/>
+                        <button type="button" onclick="availableEmail()">확인</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+    let modal = document.querySelector('#emailCheckModal');
+    function openEmailCheckModal(){
+        modal.style.display="block";
+    }
+
+    function availableEmail(){
+        let form = $("#availableEmailForm")[0];
+        let formData = new FormData(form);
+        $.ajax({
+            type: "POST",
+            url : "/idCheck",
+            data: formData,
+            processData: false,
+            contentType:false,
+            success:function(result){
+                console.log(result);
+
+                /*사용가능한 아이디 일때*/
+               if(result == "사용가능한 email입니다."){
+                   let emailCheckInput = $('#emailCheckInput').val();
+                   modal.style.display="none";
+                   alert(result);
+                   $('#email').val(emailCheckInput);
+                }else{
+                    alert(result);
+                    $('#email').val("");
+                }
+            }
+        })
+    }
+
+
+    function join(){
+        let form = $("#joinForm")[0];
+        let formData = new FormData(form);
+        $.ajax({
+            type: "POST",
+            url : "/join",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data){
+                alert(data);
+                location.href = "/main";
+            }
+
+        })
+    }
+
+</script>
+</body>
+</html>
